@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                    // ใช้ JavaScript เวอร์ชัน ES2020
+    "module": "commonjs",                  // ใช้โมดูล CommonJS สำหรับ Node.js
+    "rootDir": "./src",                    // โฟลเดอร์ต้นทางของไฟล์ TypeScript
+    "outDir": "./dist",                    // โฟลเดอร์ปลายทางสำหรับไฟล์ JavaScript หลังจากคอมไพล์
+    "strict": true,                        // เปิดการตรวจสอบ TypeScript แบบเข้มงวด
+    "esModuleInterop": true,               // รองรับการ import/export แบบ ES6
+    "forceConsistentCasingInFileNames": true, // ป้องกันปัญหา Case-Sensitivity
+    "skipLibCheck": true                   // ข้ามการเช็กประเภทในไฟล์ .d.ts
+  },
+  "include": ["src/**/*"],                 // รวมไฟล์ TypeScript ทั้งหมดในโฟลเดอร์ src
+  "exclude": ["node_modules"]              // ยกเว้นโฟลเดอร์ node_modules
+}
