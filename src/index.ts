@@ -1,17 +1,18 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import connectDB from './db';
 
 const app = express();
-const port = 3000;
+const port = 5012;
 
-// Middleware
+// เรียกใช้ MongoDB
+connectDB();
+
 app.use(express.json());
 
-// Route ตัวอย่าง
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript wdasdsdith Express!');
+app.get('/', (req, res) => {
+    res.send('Hello, MongoDB with Express!');
 });
 
-// เริ่มรันเซิร์ฟเวอร์
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
