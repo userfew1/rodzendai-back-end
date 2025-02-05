@@ -4,6 +4,13 @@ import CarModel from "../models/car.model";
 // 🔹 เพิ่มข้อมูลรถ
 export const createCar = async (req: Request, res: Response) => {
     try {
+        const { caseID } = req.body;
+
+        // เช็คว่ามี caseID หรือไม่
+        if (!caseID) {
+            return res.status(400).json({ message: "caseID is required" });
+        }
+
         const newCar = new CarModel(req.body);
         const savedCar = await newCar.save();
         res.status(201).json(savedCar);
@@ -15,7 +22,7 @@ export const createCar = async (req: Request, res: Response) => {
 // 🔹 ดึงข้อมูลรถทั้งหมด
 export const getAllCars = async (req: Request, res: Response) => {
     try {
-        const cars = await CarModel.find().populate("transportTypeID", "status departureTime returnTime");
+        const cars = await CarModel.find().populate("caseID"); // ✅ เปลี่ยนจาก transportTypeID เป็น caseID
         res.status(200).json(cars);
     } catch (error) {
         console.error("Error retrieving cars:", error);
@@ -40,6 +47,7 @@ export const updateCar = async (req: Request<{ id: string }>, res: Response): Pr
         res.status(500).json({ message: "Error updating car", error });
     }
 };
+
 // 🔹 ลบข้อมูลรถ
 export const deleteCar = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
     try {

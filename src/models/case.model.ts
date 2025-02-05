@@ -13,14 +13,14 @@ interface ICase extends Document {
 
 const CaseSchema: Schema = new Schema(
     {
-        caseID: { type: String, required: true, unique: true },
+        caseID: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true },
         userEditID: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null }, // 🔹 เชื่อมกับ User
         carID: { type: mongoose.Schema.Types.ObjectId, ref: "Car", required: true }, // 🔹 เชื่อมกับ Car
         patientID: { type: mongoose.Schema.Types.ObjectId, ref: "Patient", required: true }, // 🔹 เชื่อมกับ Patient
         status: {
             type: String,
-            enum: ["Pending", "In Progress", "Completed", "Canceled"],
-            default: "Pending",
+            enum: ["รอคัดกรอง", "ได้", "ไม่ได้", ],
+            default: "รอคัดกรอง",
         },
         description: { type: String, required: true },
     },

@@ -85,21 +85,18 @@ import LocationModel from "../models/location.model";
 //     }
 // };
 export const createBatchData = async (req: Request, res: Response): Promise<void> => {
+    const session = await mongoose.startSession();
+    session.startTransaction(); // ✅ ใช้ Transaction
+
     try {
-        const session = await mongoose.startSession(); // ✅ เริ่ม session แต่ไม่ใช้ Transaction
-
-        // ✅ 1. เพิ่มข้อมูลรถ (Car)
-        const newCar = new CarModel(req.body.car);
-        const savedCar = await newCar.save({ session });
-
-        // ✅ 2. เพิ่มข้อมูลสถานที่รับ-ส่งผู้ป่วย
+        // ✅ 1. เพิ่มข้อมูลสถานที่รับ-ส่งผู้ป่วย
         const newPickupLocation = new LocationModel(req.body.patient.pickupLocation);
         const savedPickupLocation = await newPickupLocation.save({ session });
 
         const newDropoffLocation = new LocationModel(req.body.patient.dropoffLocation);
         const savedDropoffLocation = await newDropoffLocation.save({ session });
 
-        // ✅ 3. เพิ่มข้อมูลผู้ป่วย (Patient)
+        // ✅ 2. เพิ่มข้อมูลผู้ป่วย (Patient)
         const newPatient = new PatientModel({
             name: req.body.patient.name,
             phonePrimary: req.body.patient.phonePrimary,
@@ -109,17 +106,28 @@ export const createBatchData = async (req: Request, res: Response): Promise<void
         });
         const savedPatient = await newPatient.save({ session });
 
-        // ✅ 4. เพิ่มข้อมูลเคส (Case)
+        // ✅ 3. เพิ่มข้อมูลเคส (Case)
         const newCase = new CaseModel({
             caseID: req.body.case.caseID,
-            carID: savedCar._id,
             patientID: savedPatient._id,
             status: req.body.case.status,
             description: req.body.case.description
         });
         const savedCase = await newCase.save({ session });
 
-        session.endSession(); // ✅ ปิด session
+        // ✅ 4. เพิ่มข้อมูลรถ (Car) และเชื่อม `caseID`
+        const newCar = new CarModel({
+            ...req.body.car,
+            caseID: savedCase._id // ✅ เชื่อมกับเคสที่สร้าง
+        });
+        const savedCar = await newCar.save({ session });
+
+        // ✅ 5. อัปเดต `carID` ใน Case (ถ้าจำเป็น)
+        savedCase.carID = savedCar._id;
+        await savedCase.save({ session });
+
+        await session.commitTransaction(); // ✅ ยืนยัน Transaction
+        session.endSession();
 
         res.status(201).json({
             message: "Batch data created successfully",
@@ -130,6 +138,8 @@ export const createBatchData = async (req: Request, res: Response): Promise<void
             dropoffLocation: savedDropoffLocation
         });
     } catch (error) {
+        await session.abortTransaction(); // ❌ ยกเลิก Transaction ถ้ามี Error
+        session.endSession();
         console.error("Error creating batch data:", error);
         res.status(500).json({ message: "Error creating batch data", error });
     }
