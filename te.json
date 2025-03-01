@@ -1,0 +1,134 @@
+{
+    "case_id": 1000,
+    "recorded_by": "Few",
+    "recorded_date": "2024-02-01T10:00:00Z",
+    "reason": "",
+    "cause": "",
+    "patient_info": {
+      "full_name": "คนที่7",
+      "patient_type": "ผู้พิการ",
+      "service_type": "กองทุนหลักประกันสุขภาพท้องถิ่น (กทม.)",
+      "national_id": "1234567890123",
+      "date_of_birth": "1950-05-20",
+      "phone_number": "2222222222",
+      "photo_document": " ",
+      "mobility_ability": "ช่วยเหลือตัวเองได้",
+      "medical_diagnosis": "ปวดหัว ตัวร้อน"
+    },
+    "appointment_info": {
+      "appointment_date": "2025-02-26",
+      "appointment_time": "09:00",
+      "hospital_name": "โรงพยาบาลพญาไท 3",
+      "hospital_code": "รหัสโรงพยาบาล",
+      "photo_document": "base64",
+      "type_document": "JPEG"
+    },
+    "case_evaluation": {
+      "case_status": "รอคัดกรอง",
+      "service_type": "กองทุนหลักประกันสุขภาพท้องถิ่น (กทม.)",
+      "travel_mode": {
+        "single_mode": true,
+        "single_mode_detail": {
+          "pickup_place_map": "url_pickup",
+          "dropoff_place": "url_dropoff",
+          "shuttle_type": "รถแท็กซี่",
+          "shuttle_service_name": "ศูนย์รถแท็กซี่",
+          "service_date": "วันที่ให้บริการ",
+          "distance_km": "ระยะทาง (กม.)",
+          "pickup_time": "เวลาออกจากจุดรับผู้ป่วย",
+          "dropoff_time": "เวลาถึงจุดส่งผู้ป่วย"
+        },
+        "multi_mode": false,
+        "multi_mode_detail": [
+          {
+            "transit_at": "ต่อที่ 1",
+            "pickup_place_map": "url_pickup",
+            "dropoff_place": "url_dropoff",
+            "shuttle_type": "รถแท็กซี่",
+            "shuttle_service_name": "ศูนย์รถแท็กซี่",
+            "service_date": "วันที่ให้บริการ",
+            "distance_km": "ระยะทาง (กม.)",
+            "pickup_time": "เวลาออกจากจุดรับผู้ป่วย",
+            "dropoff_time": "เวลาถึงจุดส่งผู้ป่วย"
+          },
+          {
+            "transit_at": "ต่อที่ 2",
+            "pickup_place_map": "url_pickup",
+            "dropoff_place": "url_dropoff",
+            "shuttle_type": "รถแท็กซี่",
+            "shuttle_service_name": "ศูนย์รถแท็กซี่",
+            "service_date": "วันที่ให้บริการ",
+            "distance_km": "ระยะทาง (กม.)",
+            "pickup_time": "เวลาออกจากจุดรับผู้ป่วย",
+            "dropoff_time": "เวลาถึงจุดส่งผู้ป่วย"
+          },
+          {
+            "transit_at": "ต่อที่ 3",
+            "pickup_place_map": "url_pickup",
+            "dropoff_place": "url_dropoff",
+            "shuttle_type": "รถแท็กซี่",
+            "shuttle_service_name": "ศูนย์รถแท็กซี่",
+            "service_date": "วันที่ให้บริการ",
+            "distance_km": "ระยะทาง (กม.)",
+            "pickup_time": "เวลาออกจากจุดรับผู้ป่วย",
+            "dropoff_time": "เวลาถึงจุดส่งผู้ป่วย"
+          }
+        ]
+      }
+    },
+    "reporter_info": {
+      "full_name": "ชื่อ - นามสกุล ผู้แจ้ง",
+      "relation_to_patient": "ญาติ",
+      "phone_number": "+66897654321"
+    },
+    "companions": [
+      {
+        "full_name": "ชื่อ - นามสกุล ผู้ติดตาม",
+        "relation_to_patient": "ความสัมพันธ์กับผู้ป่วย",
+        "phone_number": "+66912345678"
+      },
+      {
+        "full_name": "ชื่อ - นามสกุล ผู้ติดตาม",
+        "relation_to_patient": "ความสัมพันธ์กับผู้ป่วย",
+        "phone_number": "+66987654321"
+      }
+    ],
+    "transport_request": [
+      {
+        "departure_schedule": true,
+        "status": "",
+        "pickup_location": {
+          "pickup_place": "149/123 กทม สายไหม สายไหม ",
+          "province": "กทม",
+          "district": "สายไหม",
+          "subdistrict": "สายไหม",
+          "landmark": "ใกล้ๆมีผ้าสีแดง"
+        },
+        "dropoff_location": {
+          "dropoff_place": "90 อาคารกรมสรรพากร ซ.พหลโยธิน 7 ถ.พหลโยธิน แขวงสามเสนใน เขตพญาไท กรงเทพฯ 10400",
+          "province": "กรงเทพฯ",
+          "district": "แขวงสามเสนใน",
+          "subdistrict": "เขตพญาไท",
+          "landmark": "ใกล้ อาคาร 91"
+        }
+      },
+      {
+        "return_schedule": true,
+        "status": "",
+        "pickup_location": {
+          "pickup_place": "149/123 กทม สายไหม สายไหม ",
+          "province": "กทม",
+          "district": "สายไหม",
+          "subdistrict": "สายไหม",
+          "landmark": "ใกล้ๆมีผ้าสีแดง"
+        },
+        "dropoff_location": {
+          "dropoff_place": "90 อาคารกรมสรรพากร ซ.พหลโยธิน 7 ถ.พหลโยธิน แขวงสามเสนใน เขตพญาไท กรงเทพฯ 10400",
+          "province": "กรงเทพฯ",
+          "district": "แขวงสามเสนใน",
+          "subdistrict": "เขตพญาไท",
+          "landmark": "ใกล้ อาคาร 91"
+        }
+      }
+    ]
+  }

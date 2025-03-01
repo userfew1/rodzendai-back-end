@@ -1,32 +1,80 @@
-import mongoose, { Schema, Document } from "mongoose";
+import db from "../connect_Firestore";
 
-interface ICase extends Document {
-    caseID: string;
-    userEditID?: mongoose.Types.ObjectId | null;
-    carID: mongoose.Schema.Types.ObjectId;
-    patientID: mongoose.Schema.Types.ObjectId;
-    status: string;
-    description: string;
-    createdAt: Date;
-    updatedAt: Date;
+
+export interface CaseDocument {
+  case_id: number;
+  status: string;
+  recorded_by: string;
+  recorded_date: string;
+  reason?: string;
+  cause?: string;
+  appointment_results: {
+    notes: string;
+    outcome: boolean;
+  };
+  patient_info: {
+    full_name: string;
+    patient_type: string;
+    service_type: string;
+    national_id: string;
+    date_of_birth: string;
+    phone_number: string;
+    photo_document: string;
+    mobility_ability: string;
+    medical_diagnosis: string;
+  };
+  appointment_info: {
+    appointment_date: string;
+    appointment_time: string;
+    hospital_name: string;
+    hospital_code: string;
+    photo_document: string;
+    type_document: string;
+  };
+  reporter_info: {
+    full_name: string;
+    relation_to_patient: string;
+    phone_number: string;
+  };
+  companions: {
+    full_name: string;
+    relation_to_patient: string;
+    phone_number: string;
+  }[];
+  transportationTypes: string;
+  transport_request: {
+    departure_schedule: boolean;
+    return_schedule: boolean;
+    pickup_location: {
+      pickup_place: string;
+      province: string;
+      district: string;
+      subdistrict: string;
+      landmark: string;
+    };
+    dropoff_location: {
+      dropoff_place: string;
+      province: string;
+      district: string;
+      subdistrict: string;
+      landmark: string;
+    };
+  };
+  travel_mode: {
+    transit_at: string;
+    pickup_place_map: string;
+    dropoff_place: string;
+    shuttle_type: string;
+    shuttle_service_name: string;
+    service_date: string;
+    distance_km: string;
+    pickup_time: string;
+    dropoff_time: string;
+  }[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const CaseSchema: Schema = new Schema(
-    {
-        caseID: { type: String, required: true, unique: true },
-        userEditID: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null }, // 🔹 เชื่อมกับ User
-        carID: { type: mongoose.Schema.Types.ObjectId, ref: "Car", required: true }, // 🔹 เชื่อมกับ Car
-        patientID: { type: mongoose.Schema.Types.ObjectId, ref: "Patient", required: true }, // 🔹 เชื่อมกับ Patient
-        status: {
-            type: String,
-            enum: ["Pending", "In Progress", "Completed", "Canceled"],
-            default: "Pending",
-        },
-        description: { type: String, required: true },
-    },
-    { timestamps: true } // 🔹 เพิ่ม `createdAt` และ `updatedAt` อัตโนมัติ
-);
+const caseCollection = db.collection("cases");
 
-const CaseModel = mongoose.model<ICase>("Case", CaseSchema);
-
-export default CaseModel;
+export default caseCollection;
