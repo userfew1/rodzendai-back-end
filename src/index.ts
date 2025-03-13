@@ -1,17 +1,14 @@
-import express, { Request, Response } from 'express';
+import cors from 'cors';
+import express from 'express';
+import caseRoutes from './routes/index';
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 8080;
 
-// Middleware
-app.use(express.json());
+app.use(cors()); // อนุญาตให้ทุกโดเมนเข้าถึง API
+app.use(express.json()); // ใช้ JSON Middleware
+app.use('/api', caseRoutes); // ใช้ Router
 
-// Route ตัวอย่าง
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript wdasdsdith Express!');
-});
-
-// เริ่มรันเซิร์ฟเวอร์
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
