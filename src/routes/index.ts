@@ -4,6 +4,7 @@ import {
   createCaseCRM,
   getAllCases,
   getCaseById,
+  getCaseForCRM,
   updateCase,
 } from "../controllers/case.controller";
 
@@ -23,4 +24,6 @@ router.get("/cases/:case_id", getCaseById);
 // 🟢 อัปเดตข้อมูลเคสตาม `case_id`
 router.put("/cases/:case_id", updateCase);
 
+// 🟢 ดึงข้อมูลเคสสำหรับ CRM
+router.post("/cases/crm/get", getCaseForCRM);
 export default router;
